@@ -1,0 +1,33 @@
+#!/bin/bash
+
+AZ_FUNCTION_DIR=az-functions
+
+if [ "${1}x" = "x" ]; then
+    echo Usage: $0 \<appname\>/\<functionname\>
+    exit
+fi
+
+
+APPLICATION=$(dirname $1)
+FUNCTION=$(basename $1)
+FUNCTION_DIR=$APPLICATION/$AZ_FUNCTION_DIR/$FUNCTION
+
+if [ $APPLICATION = "." ]; then
+    echo Usage: $0 \<appname\>/\<functionname\>
+    exit
+fi
+
+if [ ! -e $APPLICATION ]; then
+    echo Application $APPLICATION doesn\'t exist
+    exit
+fi
+
+
+if [ -e $FUNCTION_DIR ]; then
+    echo Function directory $FUNCTION_DIR already exists
+    exit
+fi
+
+cd $APPLICATION/$AZ_FUNCTION_DIR || exit
+func new --language custom -t httptrigger -n $FUNCTION -a anonymous
+

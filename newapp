@@ -1,0 +1,20 @@
+#!/bin/bash
+
+AZ_FUNCTION_DIR=az-functions
+
+if [ "${1}x" = "x" ]; then
+    echo Usage: $0 \<new application name\>
+    exit
+fi
+
+if [ -e $1 ]; then
+    echo $1 already exists
+    exit
+fi
+
+mkdir -p $1/$AZ_FUNCTION_DIR || exit
+cd $1 || exit
+func init --worker-runtime custom --prefix $AZ_FUNCTION_DIR
+echo Deleting $AZ_FUNCTION_DIR/.gitignore && rm $AZ_FUNCTION_DIR/.gitignore
+echo Deleting $AZ_FUNCTION_DIR/.vscode && rm -R $AZ_FUNCTION_DIR/.vscode 
+
