@@ -1,4 +1,7 @@
 #!/bin/bash
+# Creates a new Azure Function configuration in application/functionname
+# using Azure Functions Core Tool
+# eg. $ ./newapp opssys/burnaddress
 
 AZ_FUNCTION_DIR=az-functions
 

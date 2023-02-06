@@ -1,4 +1,7 @@
 #!/bin/bash
+# Creates a new application Azure Function configuration in applicationname subdirectory
+# using Azure Functions Core Tool
+# eg. $ ./newapp partnersys
 
 AZ_FUNCTION_DIR=az-functions
 
